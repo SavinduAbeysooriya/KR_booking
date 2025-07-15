@@ -42,6 +42,14 @@
     <link href="../assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
     <link href="../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
     <link href="../assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
+          <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+
+
+        <!-- Styles -->
+        @livewireStyles
     <script>
         var phoenixIsRTL = window.config.config.phoenixIsRTL;
         if (phoenixIsRTL) {
@@ -76,6 +84,10 @@
     </main>
     {{--  End of Main Content  --}}
 
+
+            @stack('modals')
+
+        @livewireScripts
     <!-- ===============================================-->
     <!--    JavaScripts-->
     <!-- ===============================================-->

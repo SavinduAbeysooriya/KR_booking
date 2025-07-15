@@ -4,7 +4,7 @@
           <div class="navbar-vertical-content">
             <ul class="navbar-nav flex-column" id="navbarVerticalNav">
               <li class="nav-item">
-              <div class="nav-item-wrapper"><a class="nav-link label-1" href="../apps/chat.html" role="button" data-bs-toggle="" aria-expanded="false">
+              <div class="nav-item-wrapper"><a class="nav-link label-1" href="{{ route('Home') }}" role="button" data-bs-toggle="" aria-expanded="false">
                     <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="monitor"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Dashboard</span></span>
                     </div>
                   </a>
