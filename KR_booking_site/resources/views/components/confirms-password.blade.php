@@ -1,4 +1,4 @@
-@props(['title' => __('Confirm Password'), 'content' => __('For your security, please confirm your password to continue.'), 'button' => __('Confirm')])
+{{--  @props(['title' => __('Confirm Password'), 'content' => __('For your security, please confirm your password to continue.'), 'button' => __('Confirm')])
 
 @php
     $confirmableId = md5($attributes->wire('then'));
@@ -43,4 +43,65 @@
         </x-button>
     </x-slot>
 </x-dialog-modal>
+@endonce  --}}
+@props(['then', 'title' => 'Confirm Password', 'content' => 'For your security, please confirm your password to continue.', 'button' => 'Confirm'])
+
+@php
+    $confirmableId = md5($attributes->wire('then'));
+@endphp
+
+<span
+    {{ $attributes->merge(['wire:click' => "startConfirmingPassword('$confirmableId')"]) }}
+    x-data
+    x-ref="span"
+    x-on:password-confirmed.window="
+        if ($event.detail.id === '{{ $confirmableId }}') {
+            // Close the modal first
+            const modal = bootstrap.Modal.getInstance(document.getElementById('confirmPasswordModal'));
+            if (modal) {
+                modal.hide();
+            }
+            // Then dispatch the 'then' event after a short delay
+            setTimeout(() => $refs.span.dispatchEvent(new CustomEvent('then', { bubbles: false })), 250);
+        }
+    "
+    data-bs-toggle="modal"
+    data-bs-target="#confirmPasswordModal"
+>
+    {{ $slot }}
+</span>
+
+@once
+<!-- Modal -->
+<div wire:ignore.self class="modal fade" id="confirmPasswordModal" tabindex="-1" aria-labelledby="confirmPasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="confirmPasswordModalLabel">{{ $title }}</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>{{ $content }}</p>
+
+                <div class="mt-3">
+                    <input type="password"
+                        class="form-control"
+                        placeholder="Password"
+                        autocomplete="current-password"
+                        wire:model.defer="confirmablePassword"
+                        wire:keydown.enter="confirmPassword"
+                        x-ref="confirmable_password"
+                    />
+                    <x-input-error for="confirmablePassword" class="mt-2" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-light" type="button" data-bs-dismiss="modal">Cancel</button>
+                <button class="btn btn-primary" wire:click="confirmPassword" wire:loading.attr="disabled">
+                    {{ $button }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 @endonce

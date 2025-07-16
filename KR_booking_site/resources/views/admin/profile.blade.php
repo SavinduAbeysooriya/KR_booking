@@ -32,5 +32,10 @@
             <livewire:profile.delete-user-form />
         </div>
         @endif
+
+
+        {{--  @livewire('profile.get-verified-form')  --}}
+         {{--  <livewire:profile.get-verified-form />  --}}
+
     </div>
 @endsection
