@@ -538,10 +538,24 @@
             <li class="nav-item dropdown"><a class="nav-link lh-1 pe-0" id="navbarDropdownUser" href="#!"
                     role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true"
                     aria-expanded="false">
-                    <div class="avatar avatar-l ">
-                        <img class="rounded-circle " src="{{ Auth::user()->profile_photo_url }}" alt="" />
+<div class="position-relative d-inline-block">
+    <div class="avatar avatar-l">
+        <img class="rounded-circle" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+    </div>
 
-                    </div>
+    @if (Auth::user()->status === 'verified')
+        <!-- Verified Badge using RemixIcon -->
+<span class="position-absolute bottom-0 end-0 bg-success rounded-circle d-flex align-items-center justify-content-center"
+      style="width: 16px; height: 16px;" title="Verified">
+    <i class="fas fa-check-circle text-dark fs-8"></i>
+</span>
+
+
+
+
+    @endif
+</div>
+
                 </a>
                 <div class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-profile shadow border"
                     aria-labelledby="navbarDropdownUser">

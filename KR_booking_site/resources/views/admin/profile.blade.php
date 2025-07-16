@@ -35,7 +35,7 @@
 
 
         {{--  @livewire('profile.get-verified-form')  --}}
-         {{--  <livewire:profile.get-verified-form />  --}}
+         <livewire:profile-verification />
 
     </div>
 @endsection

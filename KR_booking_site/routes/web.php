@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Livewire\ProfileVerification;
 
 Route::get('/', function () {
     return view('welcome');
@@ -41,3 +42,13 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth', 'verified'])->get('/admin/profile', function () {
     return view('admin.profile');
 })->name('admin.profile');
+
+
+
+
+Route::get('/profile/verify', function () {
+    // return view('layouts.app', [
+    //     'title' => 'Get Verified',
+    //     'slot' => app('livewire')->mount(\App\Livewire\ProfileVerification::class)->html()
+    // ]);
+})->middleware('auth')->name('profile.verify');
