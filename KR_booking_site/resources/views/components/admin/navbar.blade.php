@@ -538,23 +538,21 @@
             <li class="nav-item dropdown"><a class="nav-link lh-1 pe-0" id="navbarDropdownUser" href="#!"
                     role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true"
                     aria-expanded="false">
-<div class="position-relative d-inline-block">
-    <div class="avatar avatar-l">
-        <img class="rounded-circle" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
-    </div>
+                    <div class="position-relative d-inline-block">
+                        <div class="avatar avatar-l">
+                            <img class="rounded-circle" src="{{ Auth::user()->profile_photo_url }}"
+                                alt="{{ Auth::user()->name }}" />
+                        </div>
 
-    @if (Auth::user()->status === 'verified')
-        <!-- Verified Badge using RemixIcon -->
-<span class="position-absolute bottom-0 end-0 bg-success rounded-circle d-flex align-items-center justify-content-center"
-      style="width: 16px; height: 16px;" title="Verified">
-    <i class="fas fa-check-circle text-dark fs-8"></i>
-</span>
-
-
-
-
-    @endif
-</div>
+                        @if (Auth::user()->status === 'verified')
+                            <!-- Verified Badge using RemixIcon -->
+                            <span
+                                class="position-absolute bottom-0 end-0 badge bg-white text-success rounded-circle d-flex align-items-center justify-content-center"
+                                style="width: 12px; height: 12px;" title="Verified">
+                                <i class="fas fa-check-circle  fs-8"></i>
+                            </span>
+                        @endif
+                    </div>
 
                 </a>
                 <div class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-profile shadow border"
@@ -569,23 +567,24 @@
                                 </div>
                                 <h6 class="mt-2 text-body-emphasis">{{ Auth::user()->name }}</h6>
                             </div>
-                          <div class="mb-3 mx-3">
-    <div class="form-control form-control-sm">
-        <span id="statusUpdateInput">{{ Auth::user()->email }}</span>
-    </div>
-</div>
+                            <div class="mb-3 mx-3">
+                                <div class="form-control form-control-sm">
+                                    <span id="statusUpdateInput">{{ Auth::user()->email }}</span>
+                                </div>
+                            </div>
 
                         </div>
                         <div class="overflow-auto scrollbar" style="height: 10rem;">
                             <ul class="nav d-flex flex-column mb-2 pb-1">
-                                <li class="nav-item"><a class="nav-link px-3 d-block" href="{{ route('admin.profile') }}"> <span
-                                            class="me-2 text-body align-bottom"
+                                <li class="nav-item"><a class="nav-link px-3 d-block"
+                                        href="{{ route('admin.profile') }}"> <span class="me-2 text-body align-bottom"
                                             data-feather="user"></span><span>Profile</span></a></li>
-                                <li class="nav-item"><a class="nav-link px-3 d-block" href="{{ route('Home') }}"><span
-                                            class="me-2 text-body align-bottom"
+                                <li class="nav-item"><a class="nav-link px-3 d-block"
+                                        href="{{ route('Home') }}"><span class="me-2 text-body align-bottom"
                                             data-feather="pie-chart"></span>Dashboard</a></li>
                                 <li class="nav-item"><a class="nav-link px-3 d-block" href="#!"> <span
-                                            class="me-2 text-body align-bottom" data-feather="lock"></span>My Properties</a></li>
+                                            class="me-2 text-body align-bottom" data-feather="lock"></span>My
+                                        Properties</a></li>
                                 <li class="nav-item"><a class="nav-link px-3 d-block" href="#!"> <span
                                             class="me-2 text-body align-bottom"
                                             data-feather="settings"></span>Settings &amp; Privacy </a></li>
@@ -598,27 +597,27 @@
                             </ul>
                         </div>
                         {{--  <div class="card-footer p-0 border-top border-translucent">  --}}
-                            {{--  <ul class="nav d-flex flex-column my-3">
+                        {{--  <ul class="nav d-flex flex-column my-3">
                                 <li class="nav-item"><a class="nav-link px-3 d-block" href="#!"> <span
                                             class="me-2 text-body align-bottom" data-feather="user-plus"></span>Add
                                         another account</a></li>
                             </ul>  --}}
-                            <hr />
-                            <div class="px-3">
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button type="submit" class="btn btn-phoenix-secondary d-flex flex-center w-100">
-                                        <span class="me-2" data-feather="log-out"></span> Sign out
-                                    </button>
-                                </form>
-                            </div>
+                        <hr />
+                        <div class="px-3">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="btn btn-phoenix-secondary d-flex flex-center w-100">
+                                    <span class="me-2" data-feather="log-out"></span> Sign out
+                                </button>
+                            </form>
+                        </div>
 
-                            <div class="my-2 text-center fw-bold fs-10 text-body-quaternary">
-                                {{--  <a
+                        <div class="my-2 text-center fw-bold fs-10 text-body-quaternary">
+                            {{--  <a
                                     class="text-body-quaternary me-1" href="#!">Privacy policy</a>&bull;<a
                                     class="text-body-quaternary mx-1" href="#!">Terms</a>&bull;<a
                                     class="text-body-quaternary ms-1" href="#!">Cookies</a>  --}}
-                                </div>
+                        </div>
                         {{--  </div>  --}}
                     </div>
                 </div>

@@ -13,13 +13,13 @@ class ProfileVerification extends Component
     public $phone_number;
     public $address;
     public $date_of_birth;
-       public $gender ;
+    public $gender;
     public $national_id_or_passport;
     public $otp;
     public $showOtpField = false;
     public $verificationSuccess = false;
 
-      public $isVerified = false;
+    public $isVerified = false;
 
 
 
@@ -28,19 +28,11 @@ class ProfileVerification extends Component
         'address' => 'required|string|max:255',
         'date_of_birth' => 'required|date',
         'national_id_or_passport' => 'required|string|max:50',
-         'gender' => 'required|in:male,female,other', // Add gender validation
+        'gender' => 'required|in:male,female,other', // Add gender validation
     ];
 
-    // public function mount()
-    // {
-    //     $user = Auth::user();
-    //     $this->phone_number = $user->phone_number;
-    //     $this->address = $user->address;
-    //     $this->date_of_birth = $user->date_of_birth;
-    //     $this->national_id_or_passport = $user->national_id_or_passport;
-    // }
 
-      public function mount()
+    public function mount()
     {
         $user = Auth::user();
         $this->isVerified = $user->status === 'verified'; // Check verification status
@@ -50,7 +42,7 @@ class ProfileVerification extends Component
             $this->address = $user->address;
             $this->date_of_birth = $user->date_of_birth;
             $this->national_id_or_passport = $user->national_id_or_passport;
-          $this->gender = $user->gender; // Initialize gender
+            $this->gender = $user->gender; // Initialize gender
 
         }
     }
@@ -100,47 +92,47 @@ class ProfileVerification extends Component
     // }
 
 
-//this will not use the production , this for testing and SSL certificate working one is commented
+    //this will not use the production , this for testing and SSL certificate working one is commented
     protected function sendOtp($phoneNumber, $otp)
-{
-    try {
-        $phoneNumber = preg_replace('/[^0-9]/', '', $phoneNumber);
-        if (!str_starts_with($phoneNumber, '+')) {
-            $phoneNumber = '+94' . ltrim($phoneNumber, '0');
+    {
+        try {
+            $phoneNumber = preg_replace('/[^0-9]/', '', $phoneNumber);
+            if (!str_starts_with($phoneNumber, '+')) {
+                $phoneNumber = '+94' . ltrim($phoneNumber, '0');
+            }
+
+            $httpClient = new \Twilio\Http\CurlClient([
+                CURLOPT_SSL_VERIFYHOST => false,
+                CURLOPT_SSL_VERIFYPEER => false
+            ]);
+
+            $client = new \Twilio\Rest\Client(
+                env('TWILIO_SID'),
+                env('TWILIO_TOKEN'),
+                null,
+                null,
+                $httpClient
+            );
+
+
+
+
+            $message = $client->messages->create(
+                $phoneNumber,
+                [
+                    'from' => env('TWILIO_FROM'),
+                    'body' => "Your verification OTP is: $otp"
+                ]
+            );
+
+            Log::info("OTP sent to $phoneNumber via Twilio. SID: " . $message->sid);
+            return true;
+        } catch (\Exception $e) {
+            Log::error("Twilio SMS error: " . $e->getMessage());
+            session()->flash('error', 'Failed to send OTP. Please try again later.');
+            return false;
         }
-
-        $httpClient = new \Twilio\Http\CurlClient([
-            CURLOPT_SSL_VERIFYHOST => false,
-            CURLOPT_SSL_VERIFYPEER => false
-        ]);
-
-        $client = new \Twilio\Rest\Client(
-            env('TWILIO_SID'),
-            env('TWILIO_TOKEN'),
-            null,
-            null,
-            $httpClient
-        );
-
-
-
-
-        $message = $client->messages->create(
-            $phoneNumber,
-            [
-                'from' => env('TWILIO_FROM'),
-                'body' => "Your verification OTP is: $otp"
-            ]
-        );
-
-        Log::info("OTP sent to $phoneNumber via Twilio. SID: " . $message->sid);
-        return true;
-    } catch (\Exception $e) {
-        Log::error("Twilio SMS error: " . $e->getMessage());
-        session()->flash('error', 'Failed to send OTP. Please try again later.');
-        return false;
     }
-}
 
     public function verifyOtp()
     {

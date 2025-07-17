@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Livewire\ProfileVerification;
+use App\Livewire\AmenityTypeForm;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -46,9 +48,9 @@ Route::middleware(['auth', 'verified'])->get('/admin/profile', function () {
 
 
 
-Route::get('/profile/verify', function () {
-    // return view('layouts.app', [
-    //     'title' => 'Get Verified',
-    //     'slot' => app('livewire')->mount(\App\Livewire\ProfileVerification::class)->html()
-    // ]);
-})->middleware('auth')->name('profile.verify');
+Route::get('/profile/verify', function () {})->middleware('auth')->name('profile.verify');
+
+
+Route::middleware(['auth', 'verified'])->get('/admin/amenity-types', function () {
+    return view('admin.amenity_types');
+})->name('admin.amenity-types');

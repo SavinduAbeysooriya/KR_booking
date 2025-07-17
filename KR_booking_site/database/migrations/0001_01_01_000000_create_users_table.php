@@ -20,7 +20,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
-            $table->integer('status')->nullable();
+            $table->string('status')->nullable();
             $table->string('role')->nullable();
             $table->string('gender')->nullable();
             $table->string('phone_number')->nullable();

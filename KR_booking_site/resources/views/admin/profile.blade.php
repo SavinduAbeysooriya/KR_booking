@@ -1,15 +1,11 @@
-@extends('layouts.admin') {{-- your custom layout --}}
-
+@extends('layouts.admin')
 @section('content')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<meta name="csrf-token" content="{{ csrf_token() }}">
-     <!-- Scripts -->
-    {{--  @vite(['resources/css/app.css', 'resources/js/app.js'])  --}}
-        {{--  @vite([ 'resources/js/app.js'])  --}}
     <div class="container py-6">
         {{-- Profile Info Form --}}
         <div class="mt-8">
-        <livewire:profile.update-profile-information-form />
+            <livewire:profile.update-profile-information-form />
         </div>
         {{-- Password Update --}}
         <div class="mt-8">
@@ -28,14 +24,15 @@
 
         {{-- Delete Account --}}
         @if (Laravel\Jetstream\Jetstream::hasAccountDeletionFeatures())
-        <div class="mt-8">
-            <livewire:profile.delete-user-form />
-        </div>
+            <div class="mt-8">
+                <livewire:profile.delete-user-form />
+            </div>
         @endif
 
+        {{-- profile verification component  --}}
+        <livewire:profile-verification />
 
-        {{--  @livewire('profile.get-verified-form')  --}}
-         <livewire:profile-verification />
+        
 
     </div>
 @endsection

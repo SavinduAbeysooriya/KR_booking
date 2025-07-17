@@ -54,7 +54,7 @@
                               <!-- more inner pages-->
                             </li>
 
-                            <li class="nav-item"><a class="nav-link" href="../apps/e-commerce/admin/refund.html">
+                            <li class="nav-item"><a class="nav-link" href="{{ route('admin.amenity-types') }}">
                                 <div class="d-flex align-items-center"><span class="nav-link-text">Property Amenities</span>
                                 </div>
                               </a>
