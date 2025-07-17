@@ -54,3 +54,7 @@ Route::get('/profile/verify', function () {})->middleware('auth')->name('profile
 Route::middleware(['auth', 'verified'])->get('/admin/amenity-types', function () {
     return view('admin.amenity_types');
 })->name('admin.amenity-types');
+
+Route::middleware(['auth', 'verified'])->get('/admin/bathroom-facilities', function () {
+    return view('admin.bathroom_facilities');
+})->name('admin.bathroom-facilities');

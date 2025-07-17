@@ -47,7 +47,7 @@
                               </a>
                               <!-- more inner pages-->
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="../apps/e-commerce/admin/customer-details.html">
+                            <li class="nav-item"><a class="nav-link" href="{{ route('admin.bathroom-facilities') }}">
                                 <div class="d-flex align-items-center"><span class="nav-link-text">Bathroom Facilities</span>
                                 </div>
                               </a>
