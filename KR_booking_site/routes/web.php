@@ -58,3 +58,8 @@ Route::middleware(['auth', 'verified'])->get('/admin/amenity-types', function ()
 Route::middleware(['auth', 'verified'])->get('/admin/bathroom-facilities', function () {
     return view('admin.bathroom_facilities');
 })->name('admin.bathroom-facilities');
+
+
+Route::middleware(['auth', 'verified'])->get('/admin/add-new-property', function () {
+    return view('admin.add_new_property');
+})->name('admin.add-new-property');

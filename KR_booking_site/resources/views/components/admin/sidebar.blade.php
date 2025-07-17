@@ -35,7 +35,7 @@
                               </a>
                               <!-- more inner pages-->
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="../apps/e-commerce/admin/products.html">
+                            <li class="nav-item"><a class="nav-link" href="{{ route('admin.add-new-property') }}">
                                 <div class="d-flex align-items-center"><span class="nav-link-text">Add new Property</span>
                                 </div>
                               </a>
